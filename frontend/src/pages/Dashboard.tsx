@@ -10,11 +10,6 @@ import {
 } from 'recharts'
 import Navigation from '../components/Navigation'
 
-const root: HTMLElement | null = document.getElementById('root')
-if (root) {
-    root.className = 'columns-3'
-}
-
 const data = [
     { date: '01/03/24', poids: 80 },
     { date: '01/03/24', poids: 78 },
@@ -91,34 +86,34 @@ const Dashboard = () => {
             <main className="dashboard">
                 <section>
                     <h2>Dashboard</h2>
-                    <div className="cards">
-                        <div className="cards-group">
-                            <div className="card">
+                    <div className="dashboard__cards">
+                        <div className="dashboard__cards-group">
+                            <div className="dashboard__card">
                                 <i className="fa-solid fa-venus-mars"></i>
-                                <div className="cards_info">
+                                <div className="card__info">
                                     <h3>Sexe :</h3>
                                     <p>Homme</p>
                                 </div>
                             </div>
-                            <div className="card">
+                            <div className="dashboard__card">
                                 <i className="fa-regular fa-address-card"></i>
-                                <div className="cards_info">
+                                <div className="card__info">
                                     <h3>Age :</h3>
                                     <p>33 ans</p>
                                 </div>
                             </div>
                         </div>
-                        <div className="cards-group">
-                            <div className="card">
+                        <div className="dashboard__cards-group">
+                            <div className="dashboard__card">
                                 <i className="fa-solid fa-ruler"></i>
-                                <div className="cards_info">
+                                <div className="card__info">
                                     <h3>Taille :</h3>
                                     <p>183 cm</p>
                                 </div>
                             </div>
-                            <div className="card">
+                            <div className="dashboard__card">
                                 <i className="fa-solid fa-leaf"></i>
-                                <div className="cards_info">
+                                <div className="card__info">
                                     <h3>IMC :</h3>
                                     <p>21.5</p>
                                 </div>
