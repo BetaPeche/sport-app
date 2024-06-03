@@ -1,6 +1,8 @@
 nav {
     height: calc(100vh - 170px);
     min-width: 190px;
+    position: sticky;
+    top: 120px;
     ul {
         width: 100%;
         li {
