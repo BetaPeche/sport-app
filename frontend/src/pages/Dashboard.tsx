@@ -92,32 +92,36 @@ const Dashboard = () => {
                 <section>
                     <h2>Dashboard</h2>
                     <div className="cards">
-                        <div className="card">
-                            <i className="fa-solid fa-venus-mars"></i>
-                            <div className="cards_info">
-                                <h3>Sexe :</h3>
-                                <p>Homme</p>
+                        <div className="cards-group">
+                            <div className="card">
+                                <i className="fa-solid fa-venus-mars"></i>
+                                <div className="cards_info">
+                                    <h3>Sexe :</h3>
+                                    <p>Homme</p>
+                                </div>
+                            </div>
+                            <div className="card">
+                                <i className="fa-regular fa-address-card"></i>
+                                <div className="cards_info">
+                                    <h3>Age :</h3>
+                                    <p>33 ans</p>
+                                </div>
                             </div>
                         </div>
-                        <div className="card">
-                            <i className="fa-regular fa-address-card"></i>
-                            <div className="cards_info">
-                                <h3>Age :</h3>
-                                <p>33 ans</p>
+                        <div className="cards-group">
+                            <div className="card">
+                                <i className="fa-solid fa-ruler"></i>
+                                <div className="cards_info">
+                                    <h3>Taille :</h3>
+                                    <p>183 cm</p>
+                                </div>
                             </div>
-                        </div>
-                        <div className="card">
-                            <i className="fa-solid fa-ruler"></i>
-                            <div className="cards_info">
-                                <h3>Taille :</h3>
-                                <p>183 cm</p>
-                            </div>
-                        </div>
-                        <div className="card">
-                            <i className="fa-solid fa-leaf"></i>
-                            <div className="cards_info">
-                                <h3>IMC :</h3>
-                                <p>21.5</p>
+                            <div className="card">
+                                <i className="fa-solid fa-leaf"></i>
+                                <div className="cards_info">
+                                    <h3>IMC :</h3>
+                                    <p>21.5</p>
+                                </div>
                             </div>
                         </div>
                     </div>
