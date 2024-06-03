@@ -17,7 +17,7 @@ const Navigation = () => {
                 </li>
                 <li>
                     <NavLink
-                        to="/"
+                        to="/profil"
                         className={(nav) =>
                             nav.isActive ? 'navigation_li--active' : ''
                         }
