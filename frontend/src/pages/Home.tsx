@@ -8,7 +8,14 @@ if (root) {
 const Home = () => {
     return (
         <>
-            <Link to={'/dashboard'}>Dashboard</Link>
+            <Link to="/dashboard">
+                <button className="button">
+                    Dashboard
+                    <div className="hoverEffect">
+                        <div></div>
+                    </div>
+                </button>
+            </Link>
         </>
     )
 }
