@@ -1,5 +1,14 @@
+import Header from '../components/Header'
+import Navigation from '../components/Navigation'
+
 const Profil = () => {
-    return <h1>Profil</h1>
+    return (
+        <>
+            <Header />
+            <Navigation />
+            <h1>Profil</h1>
+        </>
+    )
 }
 
 export default Profil
