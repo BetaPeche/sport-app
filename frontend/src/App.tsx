@@ -15,11 +15,11 @@ function RootClassManager() {
                 case '/':
                     root.className = 'columns-1'
                     break
-                case '/dashboard':
-                    root.className = 'columns-3'
-                    break
+                // case '/dashboard':
+                //     root.className = 'columns-3'
+                //     break
                 default:
-                    root.className = 'columns-3'
+                    root.className = 'columns-2'
                     break
             }
         }
