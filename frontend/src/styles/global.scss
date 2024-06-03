@@ -63,3 +63,14 @@ body {
         grid-template-columns: 1fr 6fr;
     }
 }
+
+@media (max-width: 1028px) {
+    nav {
+        display: none;
+    }
+    #root {
+        &.columns-2 {
+            grid-template-columns: 1fr;
+        }
+    }
+}
