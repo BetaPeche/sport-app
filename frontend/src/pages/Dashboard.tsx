@@ -89,10 +89,10 @@ const Dashboard = () => {
                     <div className="dashboard__cards">
                         <div className="dashboard__cards-group">
                             <div className="dashboard__card">
-                                <i className="fa-solid fa-venus-mars"></i>
+                                <i className="fa-solid fa-fire"></i>
                                 <div className="card__info">
-                                    <h3>Sexe :</h3>
-                                    <p>Homme</p>
+                                    <h3>Besoin calorique :</h3>
+                                    <p>2700 Kcal</p>
                                 </div>
                             </div>
                             <div className="dashboard__card">
@@ -123,7 +123,43 @@ const Dashboard = () => {
                     {renderLineChart}
                 </section>
                 <div className="left-menu">
-                    <div className="div1">test</div>
+                    <div className="div1">
+                        <div className="info-bar">
+                            <div className="info-text">Graisse corporelle</div>
+                            <div className="progress">
+                                <div className="progress__bar first"></div>
+                                <div className="progress__text">30%</div>
+                            </div>
+                        </div>
+                        <div className="info-bar">
+                            <div className="info-text">Masse musculaire</div>
+                            <div className="progress">
+                                <div className="progress__bar second"></div>
+                                <div className="progress__text">70%</div>
+                            </div>
+                        </div>
+                        <div className="info-bar">
+                            <div className="info-text">Eau</div>
+                            <div className="progress">
+                                <div className="progress__bar third"></div>
+                                <div className="progress__text">50%</div>
+                            </div>
+                        </div>
+                        <div className="info-bar">
+                            <div className="info-text">Graisse viscérale</div>
+                            <div className="progress">
+                                <div className="progress__bar fourth"></div>
+                                <div className="progress__text">80%</div>
+                            </div>
+                        </div>
+                        <div className="info-bar">
+                            <div className="info-text">Protéine</div>
+                            <div className="progress">
+                                <div className="progress__bar fifth"></div>
+                                <div className="progress__text">17%</div>
+                            </div>
+                        </div>
+                    </div>
                     <div className="div2">test</div>
                 </div>
             </main>
