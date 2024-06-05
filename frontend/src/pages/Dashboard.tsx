@@ -84,7 +84,7 @@ const Dashboard = () => {
             <Header />
             <Navigation />
             <main className="dashboard">
-                <section>
+                <section className="dashboard__main">
                     <h2>Dashboard</h2>
                     <div className="dashboard__cards">
                         <div className="dashboard__cards-group">
@@ -122,46 +122,62 @@ const Dashboard = () => {
                     </div>
                     {renderLineChart}
                 </section>
-                <div className="left-menu">
-                    <div className="div1">
-                        <div className="info-bar">
-                            <div className="info-text">Graisse corporelle</div>
-                            <div className="progress">
-                                <div className="progress__bar first"></div>
-                                <div className="progress__text">30%</div>
+                <section className="dashboard__statistics">
+                    <div className="statistics__group">
+                        <div className="statistics__item">
+                            <div className="statistics__label">
+                                Graisse corporelle
+                            </div>
+                            <div className="statistics__progress">
+                                <div className="statistics__progress-bar statistics__progress-bar--fat"></div>
+                                <div className="statistics__progress-value">
+                                    30%
+                                </div>
                             </div>
                         </div>
-                        <div className="info-bar">
-                            <div className="info-text">Masse musculaire</div>
-                            <div className="progress">
-                                <div className="progress__bar second"></div>
-                                <div className="progress__text">70%</div>
+                        <div className="statistics__item">
+                            <div className="statistics__label">
+                                Masse musculaire
+                            </div>
+                            <div className="statistics__progress">
+                                <div className="statistics__progress-bar statistics__progress-bar--muscle"></div>
+                                <div className="statistics__progress-value">
+                                    70%
+                                </div>
                             </div>
                         </div>
-                        <div className="info-bar">
-                            <div className="info-text">Eau</div>
-                            <div className="progress">
-                                <div className="progress__bar third"></div>
-                                <div className="progress__text">50%</div>
+                        <div className="statistics__item">
+                            <div className="statistics__label">Eau</div>
+                            <div className="statistics__progress">
+                                <div className="statistics__progress-bar statistics__progress-bar--water"></div>
+                                <div className="statistics__progress-value">
+                                    50%
+                                </div>
                             </div>
                         </div>
-                        <div className="info-bar">
-                            <div className="info-text">Graisse viscérale</div>
-                            <div className="progress">
-                                <div className="progress__bar fourth"></div>
-                                <div className="progress__text">80%</div>
+                        <div className="statistics__item">
+                            <div className="statistics__label">
+                                Graisse viscérale
+                            </div>
+                            <div className="statistics__progress">
+                                <div className="statistics__progress-bar statistics__progress-bar--visceral-fat"></div>
+                                <div className="statistics__progress-value">
+                                    80%
+                                </div>
                             </div>
                         </div>
-                        <div className="info-bar">
-                            <div className="info-text">Protéine</div>
-                            <div className="progress">
-                                <div className="progress__bar fifth"></div>
-                                <div className="progress__text">17%</div>
+                        <div className="statistics__item">
+                            <div className="statistics__label">Protéine</div>
+                            <div className="statistics__progress">
+                                <div className="statistics__progress-bar statistics__progress-bar--protein"></div>
+                                <div className="statistics__progress-value">
+                                    17%
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div className="div2">test</div>
-                </div>
+                </section>
             </main>
         </>
     )
