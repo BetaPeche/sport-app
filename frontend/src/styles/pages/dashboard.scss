@@ -92,36 +92,38 @@ main.dashboard {
             height: 8px;
             border-radius: 4px;
             background-color: #353535;
+
+            &::after {
+                content: '';
+                position: absolute;
+                height: 100%;
+                border-radius: 4px;
+                width: var(--progress-width, 0%);
+                background: var(
+                    --progress-gradient,
+                    linear-gradient(269deg, transparent, transparent)
+                );
+                transition: width 0.8s ease;
+            }
         }
     }
 }
 
-@mixin progress-bar($width, $start-color, $end-color) {
-    &::after {
-        content: '';
-        position: absolute;
-        border-radius: 4px;
-        height: 100%;
-        width: $width;
-        background: linear-gradient(269deg, $start-color, $end-color);
-    }
-}
-
 .statistics__progress-bar {
-    &--fat {
-        @include progress-bar(30%, #fb03f5, #aa9cff);
+    &--purple {
+        --progress-gradient: linear-gradient(269deg, #fb03f5, #aa9cff);
     }
-    &--muscle {
-        @include progress-bar(80%, #5cff9c, #00ffa3);
+    &--green {
+        --progress-gradient: linear-gradient(269deg, #5cff9c, #00ffa3);
     }
-    &--water {
-        @include progress-bar(50%, #003cff, #9fa0fa);
+    &--blue {
+        --progress-gradient: linear-gradient(269deg, #003cff, #9fa0fa);
     }
-    &--visceral-fat {
-        @include progress-bar(80%, #fb035c, #fa9fa5);
+    &--red {
+        --progress-gradient: linear-gradient(269deg, #fb035c, #fa9fa5);
     }
-    &--protein {
-        @include progress-bar(17%, #fb5203, #fa9f9f);
+    &--orange {
+        --progress-gradient: linear-gradient(269deg, #fb5203, #fa9f9f);
     }
 }
 
