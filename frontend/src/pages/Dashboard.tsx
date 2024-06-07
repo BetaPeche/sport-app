@@ -9,6 +9,7 @@ import {
     ResponsiveContainer,
 } from 'recharts'
 import Navigation from '../components/Navigation'
+import InfoBar from '../components/InfoBar'
 
 const data = [
     { date: '01/03/24', poids: 80 },
@@ -124,57 +125,23 @@ const Dashboard = () => {
                 </section>
                 <section className="dashboard__statistics">
                     <div className="statistics__group">
-                        <div className="statistics__item">
-                            <div className="statistics__label">
-                                Graisse corporelle
-                            </div>
-                            <div className="statistics__progress">
-                                <div className="statistics__progress-bar statistics__progress-bar--fat"></div>
-                                <div className="statistics__progress-value">
-                                    30%
-                                </div>
-                            </div>
-                        </div>
-                        <div className="statistics__item">
-                            <div className="statistics__label">
-                                Masse musculaire
-                            </div>
-                            <div className="statistics__progress">
-                                <div className="statistics__progress-bar statistics__progress-bar--muscle"></div>
-                                <div className="statistics__progress-value">
-                                    70%
-                                </div>
-                            </div>
-                        </div>
-                        <div className="statistics__item">
-                            <div className="statistics__label">Eau</div>
-                            <div className="statistics__progress">
-                                <div className="statistics__progress-bar statistics__progress-bar--water"></div>
-                                <div className="statistics__progress-value">
-                                    50%
-                                </div>
-                            </div>
-                        </div>
-                        <div className="statistics__item">
-                            <div className="statistics__label">
-                                Graisse viscérale
-                            </div>
-                            <div className="statistics__progress">
-                                <div className="statistics__progress-bar statistics__progress-bar--visceral-fat"></div>
-                                <div className="statistics__progress-value">
-                                    80%
-                                </div>
-                            </div>
-                        </div>
-                        <div className="statistics__item">
-                            <div className="statistics__label">Protéine</div>
-                            <div className="statistics__progress">
-                                <div className="statistics__progress-bar statistics__progress-bar--protein"></div>
-                                <div className="statistics__progress-value">
-                                    17%
-                                </div>
-                            </div>
-                        </div>
+                        <InfoBar
+                            name="Graisse corporelle"
+                            value="30"
+                            color="purple"
+                        />
+                        <InfoBar
+                            name="Masse musculaire"
+                            value="70"
+                            color="green"
+                        />
+                        <InfoBar name="Eau" value="50" color="blue" />
+                        <InfoBar
+                            name="Graise viscérale"
+                            value="70"
+                            color="red"
+                        />
+                        <InfoBar name="Protéine" value="17" color="orange" />
                     </div>
                     <div className="div2">test</div>
                 </section>
