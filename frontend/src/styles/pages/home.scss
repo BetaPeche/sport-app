@@ -1,3 +1,21 @@
+main.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+    .main__buttons {
+        display: flex;
+        gap: 20px;
+    }
+    h1 {
+        font-size: clamp(2.875rem, 0.8093rem + 6.6102vw, 5.3125rem);
+        font-weight: 700;
+        line-height: 130%;
+        text-align: center;
+        padding: 1% 5%;
+    }
+}
+
 .button {
     display: inline-flex;
     align-items: center;
