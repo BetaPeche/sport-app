@@ -138,7 +138,7 @@ main.dashboard {
 
 @media (max-width: 768px) {
     main.dashboard {
-        section {
+        .dashboard__main {
             padding: 20px;
             .dashboard__cards {
                 grid-template-columns: 1fr;
@@ -156,5 +156,11 @@ main.dashboard {
 @media (max-width: 1280px) {
     main.dashboard {
         grid-template-columns: 1fr;
+        .dashboard__main {
+            grid-row: 2;
+        }
+        .dashboard__statistics {
+            grid-row: 1;
+        }
     }
 }
