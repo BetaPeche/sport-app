@@ -14,7 +14,7 @@ import InfoBar from '../components/InfoBar'
 const data = [
     { date: '01/03/24', poids: 80 },
     { date: '01/03/24', poids: 78 },
-    { date: '01/03/24', poids: 90 },
+    { date: '01/03/24', poids: 90.5 },
     { date: '01/03/24', poids: 75 },
     { date: '01/03/24', poids: 81 },
     { date: '01/03/24', poids: 78 },
@@ -25,16 +25,32 @@ const data = [
     { date: '01/03/24', poids: 82 },
 ]
 
-const minWeight =
-    Math.floor(Math.min(...data.map((item) => item.poids)) / 10) * 10
-const maxWeight =
-    Math.ceil(Math.max(...data.map((item) => item.poids)) / 10) * 10
+const minWeight = Math.min(...data.map((item) => item.poids))
+const maxWeight = Math.max(...data.map((item) => item.poids))
+
+function roundToNearestFiveUp(num: number) {
+    return Math.ceil(num / 5) * 5
+}
+
+function roundToNearestFiveDown(num: number) {
+    return Math.floor(num / 5) * 5
+}
+
+let roundedMinWeight = roundToNearestFiveDown(minWeight)
+let roundedMaxWeight = roundToNearestFiveUp(maxWeight)
+
+if (roundedMinWeight === minWeight) {
+    roundedMinWeight -= 5
+}
+if (roundedMaxWeight === maxWeight) {
+    roundedMaxWeight += 5
+}
 
 const renderLineChart = (
-    <ResponsiveContainer width="100%" height={350}>
+    <ResponsiveContainer width="100%" height={380}>
         <AreaChart
             data={data}
-            margin={{ top: 0, right: 26, left: 0, bottom: 0 }}
+            margin={{ top: 20, right: 26, left: 0, bottom: 0 }}
         >
             <defs>
                 <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
@@ -55,9 +71,10 @@ const renderLineChart = (
                 tickMargin={5}
                 axisLine={false}
                 stroke={'#fff'}
-                domain={[minWeight, maxWeight]}
+                domain={[roundedMinWeight, roundedMaxWeight]}
                 tickLine={false}
                 fontSize={12}
+                tickCount={(roundedMaxWeight - roundedMinWeight) / 5 + 1}
             />
             <CartesianGrid stroke="#fff" strokeDasharray="5" vertical={false} />
             <Tooltip
@@ -67,6 +84,7 @@ const renderLineChart = (
                     color: '#fff',
                 }}
                 itemStyle={{ color: '#fff' }}
+                formatter={(value) => [`${value} Kg`, 'Poids']}
             />
             <Area
                 type="monotone"
@@ -125,6 +143,7 @@ const Dashboard = () => {
                     {renderLineChart}
                 </section>
                 <section className="dashboard__statistics">
+                    <div className="div2">test</div>
                     <div className="statistics__group">
                         <InfoBar
                             name="Graisse corporelle"
@@ -144,7 +163,6 @@ const Dashboard = () => {
                         />
                         <InfoBar name="Protéine" value="17" color="orange" />
                     </div>
-                    <div className="div2">test</div>
                 </section>
             </main>
         </>
