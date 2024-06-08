@@ -7,16 +7,22 @@ if (root) {
 
 const Home = () => {
     return (
-        <>
-            <Link to="/dashboard">
-                <button className="button">
-                    Dashboard
-                    <div className="hoverEffect">
-                        <div></div>
-                    </div>
-                </button>
-            </Link>
-        </>
+        <main className="home">
+            <h1>Outil de suivi du poids et de la composition corporelle</h1>
+            <div className="main__buttons">
+                <Link to="/dashboard">
+                    <button className="button">Inscription</button>
+                </Link>
+                <Link to="/dashboard">
+                    <button className="button">
+                        Connexion
+                        <div className="hoverEffect">
+                            <div></div>
+                        </div>
+                    </button>
+                </Link>
+            </div>
+        </main>
     )
 }
 
