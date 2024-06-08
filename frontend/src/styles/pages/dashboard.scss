@@ -68,6 +68,11 @@ main.dashboard {
         padding: 30px;
         flex: 1;
     }
+    .statistics__group {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
 }
 
 .recharts-responsive-container {
@@ -75,17 +80,21 @@ main.dashboard {
 }
 
 .statistics__item {
-    margin-bottom: 25px;
-
     .statistics__label {
         margin-bottom: 20px;
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: capitalize;
     }
 
     .statistics__progress {
         display: flex;
         align-items: center;
         gap: 15px;
-
+        .statistics__progress-value {
+            min-width: 41px;
+            text-align: end;
+        }
         .statistics__progress-bar {
             position: relative;
             width: 100%;
@@ -103,7 +112,7 @@ main.dashboard {
                     --progress-gradient,
                     linear-gradient(269deg, transparent, transparent)
                 );
-                transition: width 0.8s ease;
+                transition: width 1s ease;
             }
         }
     }
