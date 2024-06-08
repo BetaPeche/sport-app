@@ -37,6 +37,17 @@ const Navigation = () => {
                         Settings
                     </NavLink>
                 </li>
+                <li>
+                    <NavLink
+                        to="/logout"
+                        className={(nav) =>
+                            nav.isActive ? 'navigation_li--active' : ''
+                        }
+                    >
+                        <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                        Logout
+                    </NavLink>
+                </li>
             </ul>
         </nav>
     )
