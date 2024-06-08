@@ -74,6 +74,7 @@ const renderLineChart = (
                 stroke="#165DFF"
                 strokeWidth="3"
                 fill="url(#gradient)"
+                animationDuration={1000}
             />
         </AreaChart>
     </ResponsiveContainer>
