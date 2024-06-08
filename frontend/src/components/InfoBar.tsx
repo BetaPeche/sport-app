@@ -10,14 +10,7 @@ const InfoBar: React.FC<InfoBarProps> = ({ name, value, color }) => {
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
-        const handleLoad = () => {
-            setIsLoaded(true)
-        }
-        window.addEventListener('load', handleLoad)
-
-        return () => {
-            window.removeEventListener('load', handleLoad)
-        }
+        setIsLoaded(true)
     }, [])
 
     const progressBarStyle = {
