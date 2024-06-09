@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 type InfoBarProps = {
     name: string
-    value: string | number
+    value: number
     color: string
 }
 

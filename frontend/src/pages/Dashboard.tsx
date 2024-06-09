@@ -28,11 +28,11 @@ const data = [
 const minWeight = Math.min(...data.map((item) => item.poids))
 const maxWeight = Math.max(...data.map((item) => item.poids))
 
-function roundToNearestFiveUp(num: number) {
+function roundToNearestFiveUp(num: number): number {
     return Math.ceil(num / 5) * 5
 }
 
-function roundToNearestFiveDown(num: number) {
+function roundToNearestFiveDown(num: number): number {
     return Math.floor(num / 5) * 5
 }
 
@@ -147,21 +147,21 @@ const Dashboard = () => {
                     <div className="statistics__group">
                         <InfoBar
                             name="Graisse corporelle"
-                            value="30"
+                            value={30}
                             color="purple"
                         />
                         <InfoBar
                             name="Masse musculaire"
-                            value="70"
+                            value={70}
                             color="green"
                         />
-                        <InfoBar name="Eau" value="50" color="blue" />
+                        <InfoBar name="Eau" value={50} color="blue" />
                         <InfoBar
                             name="Graise viscérale"
-                            value="70"
+                            value={70}
                             color="red"
                         />
-                        <InfoBar name="Protéine" value="17" color="orange" />
+                        <InfoBar name="Protéine" value={17} color="orange" />
                     </div>
                 </section>
             </main>
