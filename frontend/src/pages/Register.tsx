@@ -10,7 +10,7 @@ const Register = () => {
     const [error, setError] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
 
-    const regexEmail = new RegExp('([A-Za-z]+)@([A-Za-z]+)\\.([A-Za-z]+)')
+    const regexEmail = new RegExp('^[\\w.%+-]+@[\\w.-]+\\.[A-Za-z]{2,}$')
     const navigate = useNavigate()
 
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
