@@ -16,7 +16,7 @@ function RootClassManager() {
                 case '/':
                     root.className = 'columns-1'
                     break
-                case '/register':
+                case '/signup':
                     root.className = 'columns-1'
                     break
                 default:
@@ -38,7 +38,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/profil" element={<Profil />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="/signup" element={<Register />} />
                 {/* Autres routes ici */}
             </Routes>
         </BrowserRouter>
