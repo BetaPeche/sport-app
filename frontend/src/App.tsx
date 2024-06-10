@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import Settings from './pages/Settings'
 import Profil from './pages/Profil'
+import Register from './pages/Register'
 
 function RootClassManager() {
     const location = useLocation()
@@ -15,9 +16,9 @@ function RootClassManager() {
                 case '/':
                     root.className = 'columns-1'
                     break
-                // case '/dashboard':
-                //     root.className = 'columns-3'
-                //     break
+                case '/register':
+                    root.className = 'columns-1'
+                    break
                 default:
                     root.className = 'columns-2'
                     break
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/profil" element={<Profil />} />
+                <Route path="/register" element={<Register />} />
                 {/* Autres routes ici */}
             </Routes>
         </BrowserRouter>
