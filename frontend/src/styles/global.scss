@@ -11,6 +11,17 @@ a {
     text-decoration: none;
 }
 
+input {
+    height: 50px;
+    border-radius: 10px;
+    background: #16161e;
+    border: none;
+    color: #fff;
+    padding-left: 10px;
+    color: #fff;
+    font-size: 20px;
+}
+
 body {
     min-height: 100vh;
     display: flex;
