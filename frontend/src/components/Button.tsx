@@ -10,7 +10,7 @@ const Button: React.FC<ButtonProps> = ({ text, color, action }) => {
             {text}
             {color && (
                 <div className="hoverEffect">
-                    <div></div>
+                    <span></span>
                 </div>
             )}
         </button>
