@@ -7,6 +7,8 @@ import {
     AreaChart,
     Area,
     ResponsiveContainer,
+    ReferenceLine,
+    Label,
 } from 'recharts'
 import Navigation from '../components/Navigation'
 import InfoBar from '../components/InfoBar'
@@ -86,6 +88,20 @@ const renderLineChart = (
                 itemStyle={{ color: '#fff' }}
                 formatter={(value) => [`${value} Kg`, 'Poids']}
             />
+            <ReferenceLine
+                y={80}
+                ifOverflow="extendDomain"
+                stroke="red"
+                strokeWidth={2}
+            >
+                <Label
+                    value="Objectif"
+                    position="top"
+                    fill="white"
+                    fontSize={12}
+                />
+            </ReferenceLine>
+
             <Area
                 type="monotone"
                 dataKey="poids"
