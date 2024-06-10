@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Button from '../components/Button'
 
 const root: HTMLElement | null = document.getElementById('root')
 if (root) {
@@ -10,16 +11,11 @@ const Home = () => {
         <main className="home">
             <h1>Outil de suivi du poids et de la composition corporelle</h1>
             <div className="main__buttons">
-                <Link to="/dashboard">
-                    <button className="button">Inscription</button>
+                <Link to="/register">
+                    <Button text="Inscription" color={false} />
                 </Link>
                 <Link to="/dashboard">
-                    <button className="button">
-                        Connexion
-                        <div className="hoverEffect">
-                            <div></div>
-                        </div>
-                    </button>
+                    <Button text="Connexion" color={true} />
                 </Link>
             </div>
         </main>
