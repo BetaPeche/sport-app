@@ -11,7 +11,7 @@ const Home = () => {
         <main className="home">
             <h1>Outil de suivi du poids et de la composition corporelle</h1>
             <div className="main__buttons">
-                <Link to="/register">
+                <Link to="/signup">
                     <Button text="Inscription" color={false} />
                 </Link>
                 <Link to="/dashboard">
