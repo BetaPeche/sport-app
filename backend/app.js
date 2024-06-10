@@ -13,7 +13,7 @@ mongoose.connect(process.env.DB_LINK)
 app.use(cors(
 	{
 		origin: "https://sport-app-eosin.vercel.app",
-		methods: 'GET, POST, PUT, DELETE',
+		methods: ['GET', 'POST', 'PUT', 'DELETE'],
 		credentials: true
 	}
 ));
