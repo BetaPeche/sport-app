@@ -10,13 +10,7 @@ mongoose.connect(process.env.DB_LINK)
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch((error) => console.log('Connexion à MongoDB échouée !'))
 
-app.use(cors(
-	{
-		origin: "https://sport-app-eosin.vercel.app",
-		methods: ['GET', 'POST', 'PUT', 'DELETE'],
-		credentials: true
-	}
-));
+app.use(cors())
 
 app.use(express.json())
 
