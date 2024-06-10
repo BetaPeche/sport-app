@@ -12,7 +12,7 @@ mongoose.connect(process.env.DB_LINK)
 
 	app.use(cors(
 		{
-			origin: ["https://sport-app-eosin.vercel.app","localhost:3000"],
+			origin: ["https://sport-app-eosin.vercel.app","http://localhost:5173"],
 			methods: ["POST", "GET"],
 			credentials: true
 		}
