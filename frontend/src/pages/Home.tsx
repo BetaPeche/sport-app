@@ -14,7 +14,7 @@ const Home = () => {
                 <Link to="/signup">
                     <Button text="Inscription" color={false} />
                 </Link>
-                <Link to="/dashboard">
+                <Link to="/login">
                     <Button text="Connexion" color={true} />
                 </Link>
             </div>
