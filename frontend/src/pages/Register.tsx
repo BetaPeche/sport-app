@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Button from '../components/Button'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Loader from '../components/Loader'
 
 const Register = () => {
@@ -57,6 +57,7 @@ const Register = () => {
                 } else {
                     setError("Une erreur est survenue lors de l'inscription")
                 }
+                console.log(response)
             } catch (error) {
                 setError('Une erreur réseau est survenue')
             }
@@ -102,6 +103,7 @@ const Register = () => {
                     />
                 )}
             </form>
+            <Link to={'/'}>Retour</Link>
         </main>
     )
 }
