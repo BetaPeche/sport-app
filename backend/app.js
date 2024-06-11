@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const path = require('path')
 const cors = require('cors');
 const userRoutes = require('./routes/user')
+const authRoutes = require('./routes/auth')
 
 mongoose.connect(process.env.DB_LINK)
     .then(() => console.log('Connexion à MongoDB réussie !'))
@@ -21,9 +22,10 @@ mongoose.connect(process.env.DB_LINK)
 app.use(express.json())
 
 app.use('/api/auth', userRoutes)
+app.use('/api/auth', authRoutes)
 
-app.get("/", (req, res) => {
-	res.json("Hello");
-  }) 
+// app.get("/", (req, res) => {
+// 	res.json("Hello");
+// }) 
 
 module.exports = app
