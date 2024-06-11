@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 
-const PrivateRoute = () => {
+interface PrivateRouteProps {
+    redirectPath: string
+}
+
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ redirectPath }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
 
@@ -28,15 +32,19 @@ const PrivateRoute = () => {
                 setIsLoading(false)
             }
         }
-
-        validateToken()
+        if (localStorage.getItem('token')) {
+            validateToken()
+        } else {
+            setIsLoading(false)
+            setIsAuthenticated(false)
+        }
     }, [])
 
     if (isLoading) {
         return
     }
 
-    return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
+    return isAuthenticated ? <Outlet /> : <Navigate to={redirectPath} />
 }
 
 export default PrivateRoute
