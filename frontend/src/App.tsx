@@ -5,6 +5,8 @@ import Dashboard from './pages/Dashboard'
 import Settings from './pages/Settings'
 import Profil from './pages/Profil'
 import Register from './pages/Register'
+import Login from './pages/Login'
+import PrivateRoute from './components/PrivateRoute'
 
 function RootClassManager() {
     const location = useLocation()
@@ -17,6 +19,9 @@ function RootClassManager() {
                     root.className = 'columns-1'
                     break
                 case '/signup':
+                    root.className = 'columns-1'
+                    break
+                case '/login':
                     root.className = 'columns-1'
                     break
                 default:
@@ -35,10 +40,13 @@ function App() {
             <RootClassManager />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/profil" element={<Profil />} />
                 <Route path="/signup" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route element={<PrivateRoute />}>
+                    <Route path="/dashboard" element={<Dashboard />} />
+                </Route>
                 {/* Autres routes ici */}
             </Routes>
         </BrowserRouter>
