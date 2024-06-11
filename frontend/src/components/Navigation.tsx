@@ -1,6 +1,7 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 const Navigation = () => {
+    const navigate = useNavigate()
     return (
         <nav>
             <ul>
@@ -39,10 +40,15 @@ const Navigation = () => {
                 </li>
                 <li>
                     <NavLink
-                        to="/logout"
+                        to="/"
                         className={(nav) =>
                             nav.isActive ? 'navigation_li--active' : ''
                         }
+                        onClick={() => {
+                            localStorage.removeItem('token'),
+                                localStorage.removeItem('userId')
+                            navigate('/')
+                        }}
                     >
                         <i className="fa-solid fa-arrow-right-from-bracket"></i>
                         Logout
