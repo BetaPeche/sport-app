@@ -40,12 +40,12 @@ function App() {
             <RootClassManager />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/profil" element={<Profil />} />
                 <Route path="/signup" element={<Register />} />
                 <Route path="/login" element={<Login />} />
-                <Route element={<PrivateRoute />}>
+                <Route element={<PrivateRoute redirectPath="/login" />}>
                     <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/profil" element={<Profil />} />
+                    <Route path="/settings" element={<Settings />} />
                 </Route>
                 {/* Autres routes ici */}
             </Routes>
