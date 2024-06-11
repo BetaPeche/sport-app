@@ -66,9 +66,7 @@ const Login = () => {
                     id="email"
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <label htmlFor="password">
-                    Mot de passe (8 caractères minimum)
-                </label>
+                <label htmlFor="password">Mot de passe</label>
                 <input
                     type="password"
                     name="password"
