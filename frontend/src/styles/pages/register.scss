@@ -4,9 +4,10 @@ main.register {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
+    gap: 20px;
     h1 {
         font-size: 36px;
+        margin-bottom: 30px;
     }
     form {
         display: flex;
@@ -25,6 +26,12 @@ main.register {
         }
         span {
             margin-bottom: 30px;
+        }
+    }
+    a {
+        text-decoration: underline;
+        &:hover {
+            text-decoration: none;
         }
     }
 }
