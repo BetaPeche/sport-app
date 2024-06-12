@@ -61,12 +61,32 @@ main.dashboard {
     }
 
     .statistics__group,
-    .div2 {
+    .dashboard__add-data-button {
         border-radius: 16px;
         background: rgba(28, 28, 28, 0.6);
         backdrop-filter: blur(10px);
         padding: 30px;
         flex: 1;
+    }
+    .dashboard__add-data-button {
+        border: 2px dashed #e8e8e8;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        color: #e8e8e8;
+        font-size: 16px;
+        i {
+            font-size: 72px;
+        }
+        &:hover {
+            cursor: pointer;
+            color: #1f8ebe;
+        }
+        &:active {
+            background: rgba(28, 28, 28, 0.8);
+        }
     }
     .statistics__group {
         display: flex;

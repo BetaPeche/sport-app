@@ -159,7 +159,10 @@ const Dashboard = () => {
                     {renderLineChart}
                 </section>
                 <section className="dashboard__statistics">
-                    <div className="div2">test</div>
+                    <button className="dashboard__add-data-button">
+                        <i className="fa-solid fa-plus"></i>
+                        Ajouter des données
+                    </button>
                     <div className="statistics__group">
                         <InfoBar
                             name="Graisse corporelle"
