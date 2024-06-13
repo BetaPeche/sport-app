@@ -159,6 +159,7 @@ main.dashboard {
 @media (max-width: 768px) {
     main.dashboard {
         .dashboard__main {
+            border-radius: 16px 16px 0 0;
             padding: 20px;
             .dashboard__cards {
                 grid-template-columns: 1fr;
@@ -168,9 +169,13 @@ main.dashboard {
             }
         }
     }
-    .recharts-xAxis {
-        display: none;
-    }
+    // .recharts-xAxis {
+    //     .recharts-cartesian-axis-tick {
+    //         tspan {
+    //             font-size: 10px;
+    //         }
+    //     }
+    // }
 }
 
 @media (max-width: 1280px) {
