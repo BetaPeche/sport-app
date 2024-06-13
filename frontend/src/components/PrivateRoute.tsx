@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
+import Loader from './Loader'
 
 interface PrivateRouteProps {
     redirectPath: string
@@ -45,7 +46,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ redirectPath }) => {
     }, [])
 
     if (isLoading) {
-        return
+        return <Loader center={true} />
     }
 
     return isAuthenticated ? <Outlet /> : <Navigate to={redirectPath} />
