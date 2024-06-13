@@ -18,6 +18,18 @@
     filter: blur(10px);
 }
 
+.loader-center {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: calc(50% - 50px);
+    left: calc(50% - 50px);
+    .spinner1 {
+        width: 100px;
+        height: 100px;
+    }
+}
+
 @keyframes spinning82341 {
     to {
         transform: rotate(360deg);
