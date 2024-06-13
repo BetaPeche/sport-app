@@ -1,6 +1,9 @@
-const Loader = () => {
+type LoaderProps = {
+    center?: boolean
+}
+const Loader: React.FC<LoaderProps> = ({ center }) => {
     return (
-        <div className="spinner">
+        <div className={`spinner ${center && 'loader-center'}`}>
             <div className="spinner1"></div>
         </div>
     )
