@@ -6,8 +6,9 @@ const Header = () => {
             <h1>
                 <Link to={'/'}>My SPORT APP</Link>
             </h1>
-            <div className="header_user">
-                Loïc <i className="fa-regular fa-face-smile"></i>
+            <div className="header__user">
+                <span>Loïc</span>
+                <img src="./profil_base.webp" alt="Image de profil" />
             </div>
         </header>
     )
