@@ -4,4 +4,19 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
+    .header__user {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        span {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        img {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
 }
