@@ -25,6 +25,10 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ redirectPath }) => {
                 )
                 if (response.ok) {
                     setIsAuthenticated(true)
+                } else {
+                    localStorage.removeItem('token')
+                    localStorage.removeItem('userId')
+                    setIsAuthenticated(false)
                 }
             } catch (error) {
                 console.error('Error validating token:', error)
