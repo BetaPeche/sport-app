@@ -29,17 +29,6 @@ const Navigation = () => {
                 </li>
                 <li>
                     <NavLink
-                        to="/settings"
-                        className={(nav) =>
-                            nav.isActive ? 'navigation_li--active' : ''
-                        }
-                    >
-                        <i className="fa-solid fa-gear"></i>
-                        Settings
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
                         to="/"
                         className={(nav) =>
                             nav.isActive ? 'navigation_li--active' : ''
