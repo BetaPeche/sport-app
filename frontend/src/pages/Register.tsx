@@ -13,7 +13,7 @@ const Register = () => {
     const regexEmail = new RegExp('^[\\w.%+-]+@[\\w.-]+\\.[A-Za-z]{2,}$')
     const navigate = useNavigate()
 
-    const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         let errorMessage = ''
@@ -84,7 +84,7 @@ const Register = () => {
     return (
         <main className="register">
             <h1>Inscription</h1>
-            <form autoComplete="off">
+            <form autoComplete="off" onSubmit={handleSubmit}>
                 <label htmlFor="email">Email</label>
                 <input
                     type="email"
@@ -112,11 +112,7 @@ const Register = () => {
                 {loading ? (
                     <Loader />
                 ) : (
-                    <Button
-                        text="S'inscrire"
-                        color={true}
-                        action={handleSubmit}
-                    />
+                    <Button text="S'inscrire" color={true} />
                 )}
             </form>
             <Link to={'/'}>Retour</Link>

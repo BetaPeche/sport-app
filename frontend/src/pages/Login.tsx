@@ -11,7 +11,7 @@ const Login = () => {
 
     const navigate = useNavigate()
 
-    const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         let errorMessage = ''
@@ -58,7 +58,7 @@ const Login = () => {
     return (
         <main className="login">
             <h1>Connexion</h1>
-            <form autoComplete="off">
+            <form autoComplete="off" onSubmit={handleSubmit}>
                 <label htmlFor="email">Email</label>
                 <input
                     type="email"
@@ -77,11 +77,7 @@ const Login = () => {
                 {loading ? (
                     <Loader />
                 ) : (
-                    <Button
-                        text="Connexion"
-                        color={true}
-                        action={handleSubmit}
-                    />
+                    <Button text="Connexion" color={true} />
                 )}
             </form>
             <Link to={'/'}>Retour</Link>
