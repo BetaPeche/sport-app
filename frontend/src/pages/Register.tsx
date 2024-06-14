@@ -53,6 +53,22 @@ const Register = () => {
                 )
 
                 if (response.ok) {
+                    const responseConnect = await fetch(
+                        `${import.meta.env.VITE_URL_API}/api/auth/login`,
+                        {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ email, password }),
+                        }
+                    )
+                    if (responseConnect.ok) {
+                        const data = await responseConnect.json()
+                        localStorage.setItem('userId', data.userId)
+                        localStorage.setItem('token', data.token)
+                        navigate('/dashboard')
+                    }
                     navigate('/dashboard')
                 } else {
                     setError("Une erreur est survenue lors de l'inscription")
