@@ -47,7 +47,6 @@ function App() {
                     <Route path="/profil" element={<Profil />} />
                     <Route path="/settings" element={<Settings />} />
                 </Route>
-                {/* Autres routes ici */}
             </Routes>
         </BrowserRouter>
     )
