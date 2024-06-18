@@ -7,6 +7,7 @@ const userDataSchema = mongoose.Schema({
         ref: 'User',
         required: true,
     },
+    date: { type: Date, required: true },
     weight: { type: Number },
     muscularMass: { type: Number },
     water: { type: Number },
