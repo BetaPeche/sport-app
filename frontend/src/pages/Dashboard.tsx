@@ -12,7 +12,7 @@ import {
 } from 'recharts'
 import Navigation from '../components/Navigation'
 import InfoBar from '../components/InfoBar'
-import CustomModal from '../components/CustomModal'
+import InfoBar from '../components/DataModal'
 import { useState } from 'react'
 
 const data = [
@@ -212,7 +212,7 @@ const Dashboard = () => {
                         <InfoBar name="Protéine" value={17} color="orange" />
                     </div>
                 </section>
-                <CustomModal isOpen={modalIsOpen} onRequestClose={closeModal} />
+                <DataModal isOpen={modalIsOpen} onRequestClose={closeModal} />
             </main>
         </>
     )
