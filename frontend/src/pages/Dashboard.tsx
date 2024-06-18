@@ -12,7 +12,7 @@ import {
 } from 'recharts'
 import Navigation from '../components/Navigation'
 import InfoBar from '../components/InfoBar'
-import InfoBar from '../components/DataModal'
+import DataModal from '../components/DataModal'
 import { useState } from 'react'
 
 const data = [
