@@ -12,6 +12,8 @@ import {
 } from 'recharts'
 import Navigation from '../components/Navigation'
 import InfoBar from '../components/InfoBar'
+import CustomModal from '../components/CustomModal'
+import { useState } from 'react'
 
 const data = [
     { date: new Date('2021-05-30T00:00:00Z'), poids: 91 },
@@ -129,6 +131,16 @@ const renderLineChart = (
     </ResponsiveContainer>
 )
 const Dashboard = () => {
+    const [modalIsOpen, setIsOpen] = useState<boolean>(false)
+
+    function openModal() {
+        setIsOpen(true)
+    }
+
+    function closeModal() {
+        setIsOpen(false)
+    }
+
     return (
         <>
             <Header />
@@ -173,7 +185,10 @@ const Dashboard = () => {
                     {renderLineChart}
                 </section>
                 <section className="dashboard__statistics">
-                    <button className="dashboard__add-data-button">
+                    <button
+                        onClick={openModal}
+                        className="dashboard__add-data-button"
+                    >
                         <i className="fa-solid fa-plus"></i>
                         Ajouter des données
                     </button>
@@ -197,6 +212,7 @@ const Dashboard = () => {
                         <InfoBar name="Protéine" value={17} color="orange" />
                     </div>
                 </section>
+                <CustomModal isOpen={modalIsOpen} onRequestClose={closeModal} />
             </main>
         </>
     )
