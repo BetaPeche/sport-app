@@ -13,125 +13,151 @@ import {
 import Navigation from '../components/Navigation'
 import InfoBar from '../components/InfoBar'
 import DataModal from '../components/DataModal'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-const data = [
-    { date: new Date('2021-05-30T00:00:00Z'), poids: 91 },
-    { date: new Date('2021-06-06T00:00:00Z'), poids: 93 },
-    { date: new Date('2021-06-13T00:00:00Z'), poids: 91.15 },
-    { date: new Date('2021-06-15T00:00:00Z'), poids: 90.95 },
-    { date: new Date('2021-06-20T00:00:00Z'), poids: 90.45 },
-    { date: new Date('2021-06-27T00:00:00Z'), poids: 82.4 },
-]
-
-const parsedData = data.map((item) => ({
-    ...item,
-    date: item.date.getTime(),
-}))
-
-const minWeight = Math.min(...data.map((item) => item.poids))
-const maxWeight = Math.max(...data.map((item) => item.poids))
-
-function roundToNearestFiveUp(num: number): number {
-    return Math.ceil(num / 5) * 5
+type DataItem = {
+    date: string
+    weight: number
+    muscularMass: number
+    water: number
+    visceralFat: number
+    protein: number
 }
 
-function roundToNearestFiveDown(num: number): number {
-    return Math.floor(num / 5) * 5
-}
-
-let roundedMinWeight = roundToNearestFiveDown(minWeight)
-let roundedMaxWeight = roundToNearestFiveUp(maxWeight)
-
-if (roundedMinWeight - minWeight > -2.5) {
-    roundedMinWeight -= 5
-}
-if (roundedMaxWeight - maxWeight < 2.5) {
-    roundedMaxWeight += 5
-}
-
-const renderLineChart = (
-    <ResponsiveContainer width="100%" height={380}>
-        <AreaChart
-            data={parsedData}
-            margin={{ top: 20, right: 26, left: 0, bottom: 0 }}
-        >
-            <defs>
-                <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#165DFF" stopOpacity={0.5} />
-                    <stop offset="95%" stopColor="#165DFF" stopOpacity={0} />
-                </linearGradient>
-            </defs>
-            <XAxis
-                tickMargin={10}
-                stroke={'#fff'}
-                dataKey="date"
-                type="number"
-                domain={['dataMin', 'dataMax']}
-                tickFormatter={(tick) =>
-                    new Date(tick).toLocaleDateString('fr-FR', {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: '2-digit',
-                    })
-                }
-                scale="time"
-                axisLine={false}
-                interval="preserveStartEnd"
-                fontSize={12}
-            />
-            <YAxis
-                unit=" Kg"
-                tickMargin={5}
-                axisLine={false}
-                stroke={'#fff'}
-                domain={[roundedMinWeight, roundedMaxWeight]}
-                tickLine={false}
-                fontSize={12}
-                tickCount={(roundedMaxWeight - roundedMinWeight) / 5 + 1}
-            />
-            <CartesianGrid stroke="#fff" strokeDasharray="5" vertical={false} />
-            <Tooltip
-                contentStyle={{
-                    backgroundColor: 'rgba(28, 28, 28, 0.9)',
-                    borderRadius: '5px',
-                    color: '#fff',
-                }}
-                itemStyle={{ color: '#fff' }}
-                formatter={(value) => [`${value} Kg`, 'Poids']}
-                labelFormatter={(label) => new Date(label).toLocaleDateString()}
-            />
-            <Area
-                type="monotone"
-                dataKey="poids"
-                stroke="#165DFF"
-                strokeWidth="3"
-                fill="url(#gradient)"
-                animationDuration={1000}
-            />
-            <ReferenceLine
-                y={78}
-                ifOverflow="hidden"
-                stroke="red"
-                strokeWidth={2}
-            >
-                <Label
-                    value="Objectif"
-                    position="insideBottomLeft"
-                    fill="white"
-                    fontSize={14}
-                    offset={10}
-                    style={{
-                        textShadow: '1px 1px 3px #000',
-                        fontWeight: 500,
-                    }}
-                />
-            </ReferenceLine>
-        </AreaChart>
-    </ResponsiveContainer>
-)
 const Dashboard = () => {
+    const [data, setData] = useState<DataItem[]>([])
     const [modalIsOpen, setIsOpen] = useState<boolean>(false)
+
+    useEffect(() => {
+        const storedData = JSON.parse(localStorage.getItem('data') || '[]')
+        setData(storedData)
+    }, [])
+
+    const processParsedData = (data: DataItem[]) => {
+        return data.map((item) => ({
+            ...item,
+            date: new Date(item.date).getTime(),
+        }))
+    }
+
+    const parsedData = processParsedData(data)
+    console.log(parsedData)
+
+    const minWeight = Math.min(...data.map((item) => item.weight))
+    const maxWeight = Math.max(...data.map((item) => item.weight))
+
+    function roundToNearestFiveUp(num: number): number {
+        return Math.ceil(num / 5) * 5
+    }
+
+    function roundToNearestFiveDown(num: number): number {
+        return Math.floor(num / 5) * 5
+    }
+
+    let roundedMinWeight = roundToNearestFiveDown(minWeight)
+    let roundedMaxWeight = roundToNearestFiveUp(maxWeight)
+
+    if (roundedMinWeight - minWeight > -2.5) {
+        roundedMinWeight -= 5
+    }
+    if (roundedMaxWeight - maxWeight < 2.5) {
+        roundedMaxWeight += 5
+    }
+
+    const renderLineChart = (
+        <ResponsiveContainer width="100%" height={380}>
+            <AreaChart
+                data={parsedData}
+                margin={{ top: 20, right: 26, left: 0, bottom: 0 }}
+            >
+                <defs>
+                    <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop
+                            offset="5%"
+                            stopColor="#165DFF"
+                            stopOpacity={0.5}
+                        />
+                        <stop
+                            offset="95%"
+                            stopColor="#165DFF"
+                            stopOpacity={0}
+                        />
+                    </linearGradient>
+                </defs>
+                <XAxis
+                    tickMargin={10}
+                    stroke={'#fff'}
+                    dataKey="date"
+                    type="number"
+                    domain={['dataMin', 'dataMax']}
+                    tickFormatter={(tick) =>
+                        new Date(tick).toLocaleDateString('fr-FR', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: '2-digit',
+                        })
+                    }
+                    scale="time"
+                    axisLine={false}
+                    interval="preserveStartEnd"
+                    fontSize={12}
+                />
+                <YAxis
+                    unit=" Kg"
+                    tickMargin={5}
+                    axisLine={false}
+                    stroke={'#fff'}
+                    domain={[roundedMinWeight, roundedMaxWeight]}
+                    tickLine={false}
+                    fontSize={12}
+                    tickCount={(roundedMaxWeight - roundedMinWeight) / 5 + 1}
+                />
+                <CartesianGrid
+                    stroke="#fff"
+                    strokeDasharray="5"
+                    vertical={false}
+                />
+                <Tooltip
+                    contentStyle={{
+                        backgroundColor: 'rgba(28, 28, 28, 0.9)',
+                        borderRadius: '5px',
+                        color: '#fff',
+                    }}
+                    itemStyle={{ color: '#fff' }}
+                    formatter={(value) => [`${value} Kg`, 'Poids']}
+                    labelFormatter={(label) =>
+                        new Date(label).toLocaleDateString()
+                    }
+                />
+                <Area
+                    type="monotone"
+                    dataKey="weight"
+                    stroke="#165DFF"
+                    strokeWidth="3"
+                    fill="url(#gradient)"
+                    animationDuration={1000}
+                />
+                <ReferenceLine
+                    y={78}
+                    ifOverflow="hidden"
+                    stroke="red"
+                    strokeWidth={2}
+                >
+                    <Label
+                        value="Objectif"
+                        position="insideBottomLeft"
+                        fill="white"
+                        fontSize={14}
+                        offset={10}
+                        style={{
+                            textShadow: '1px 1px 3px #000',
+                            fontWeight: 500,
+                        }}
+                    />
+                </ReferenceLine>
+            </AreaChart>
+        </ResponsiveContainer>
+    )
 
     function openModal() {
         setIsOpen(true)
