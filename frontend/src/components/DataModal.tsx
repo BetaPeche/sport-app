@@ -2,6 +2,7 @@ import Modal from 'react-modal'
 import Button from './Button'
 import { useEffect, useState, ChangeEvent, FormEvent } from 'react'
 import Loader from './Loader'
+import useUserDataStore from '../userStore'
 
 interface CustomModalProps {
     isOpen: boolean
@@ -9,11 +10,11 @@ interface CustomModalProps {
 }
 
 type FormData = {
-    weight: string
-    'muscular-mass': string
-    water: string
-    'visceral-fat': string
-    protein: string
+    weight: number | null
+    'muscular-mass': number | null
+    water: number | null
+    'visceral-fat': number | null
+    protein: number | null
 }
 
 Modal.setAppElement('#root')
@@ -22,17 +23,17 @@ const CustomModal: React.FC<CustomModalProps> = ({
     isOpen,
     onRequestClose,
 }) => {
+    const { addData } = useUserDataStore()
     const [error, setError] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
     const [formData, setFormData] = useState<FormData>({
-        weight: '',
-        'muscular-mass': '',
-        water: '',
-        'visceral-fat': '',
-        protein: '',
+        weight: null,
+        'muscular-mass': null,
+        water: null,
+        'visceral-fat': null,
+        protein: null,
     })
-    const id = localStorage.getItem('userId')
-    const token = localStorage.getItem('token')
+    const id = localStorage.getItem('userId')!
 
     useEffect(() => {
         if (isOpen) {
@@ -40,34 +41,10 @@ const CustomModal: React.FC<CustomModalProps> = ({
         } else {
             document.body.classList.remove('modal-open')
         }
-        const fetchData = async () => {
-            try {
-                setLoading(true)
-                setError('')
-                const response = await fetch(
-                    `${import.meta.env.VITE_URL_API}/user/data/${id}`,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                )
-                const data = await response.json()
-                if (data) {
-                    localStorage.setItem('data', JSON.stringify(data))
-                }
-            } catch (error) {
-                console.error(error)
-            }
-            setLoading(false)
-        }
-        fetchData()
         return () => {
             document.body.classList.remove('modal-open')
         }
-    }, [isOpen, id, token])
+    }, [isOpen])
 
     const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -92,11 +69,11 @@ const CustomModal: React.FC<CustomModalProps> = ({
         let errorMessage = ''
 
         switch (true) {
-            case formData.weight === '' ||
-                formData['muscular-mass'] === '' ||
-                formData.water === '' ||
-                formData['visceral-fat'] === '' ||
-                formData.protein === '':
+            case formData.weight === null ||
+                formData['muscular-mass'] === null ||
+                formData.water === null ||
+                formData['visceral-fat'] === null ||
+                formData.protein === null:
                 errorMessage = 'Veuillez remplir tous les champs'
                 break
             default:
@@ -122,6 +99,22 @@ const CustomModal: React.FC<CustomModalProps> = ({
                         visceralFat: formData['visceral-fat'],
                         protein: formData.protein,
                     }),
+                })
+                addData({
+                    userId: id,
+                    date: new Date(Date.now()),
+                    weight: formData.weight,
+                    muscularMass: formData['muscular-mass'],
+                    water: formData.water,
+                    visceralFat: formData['visceral-fat'],
+                    protein: formData.protein,
+                })
+                setFormData({
+                    weight: null,
+                    'muscular-mass': null,
+                    water: null,
+                    'visceral-fat': null,
+                    protein: null,
                 })
             } catch (error) {
                 setError('Une erreur réseau est survenue')
@@ -149,7 +142,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
                     type="number"
                     name="weight"
                     id="weight"
-                    value={formData.weight}
+                    value={formData.weight !== null ? formData.weight : ''}
                     onChange={handleChange}
                 />
                 <label htmlFor="muscular-mass">Masse Musculaire</label>
@@ -157,7 +150,11 @@ const CustomModal: React.FC<CustomModalProps> = ({
                     type="number"
                     name="muscular-mass"
                     id="muscular-mass"
-                    value={formData['muscular-mass']}
+                    value={
+                        formData['muscular-mass'] !== null
+                            ? formData['muscular-mass']
+                            : ''
+                    }
                     onChange={handleChange}
                 />
                 <label htmlFor="water">Eau</label>
@@ -165,7 +162,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
                     type="number"
                     name="water"
                     id="water"
-                    value={formData.water}
+                    value={formData.water !== null ? formData.water : ''}
                     onChange={handleChange}
                 />
                 <label htmlFor="visceral-fat">Graisse Viscérale</label>
@@ -173,7 +170,11 @@ const CustomModal: React.FC<CustomModalProps> = ({
                     type="number"
                     name="visceral-fat"
                     id="visceral-fat"
-                    value={formData['visceral-fat']}
+                    value={
+                        formData['visceral-fat'] !== null
+                            ? formData['visceral-fat']
+                            : ''
+                    }
                     onChange={handleChange}
                 />
                 <label htmlFor="protein">Protéine</label>
@@ -181,7 +182,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
                     type="number"
                     name="protein"
                     id="protein"
-                    value={formData.protein}
+                    value={formData.protein !== null ? formData.protein : ''}
                     onChange={handleChange}
                 />
                 <span>{error}</span>

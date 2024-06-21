@@ -14,24 +14,46 @@ import Navigation from '../components/Navigation'
 import InfoBar from '../components/InfoBar'
 import DataModal from '../components/DataModal'
 import { useEffect, useState } from 'react'
+import useUserDataStore from '../userStore'
 
 type DataItem = {
-    date: string
-    weight: number
-    muscularMass: number
-    water: number
-    visceralFat: number
-    protein: number
+    date: Date
+    weight: number | null
+    muscularMass: number | null
+    water: number | null
+    visceralFat: number | null
+    protein: number | null
 }
 
 const Dashboard = () => {
-    const [data, setData] = useState<DataItem[]>([])
+    const { data, setData } = useUserDataStore()
     const [modalIsOpen, setIsOpen] = useState<boolean>(false)
+    const token = localStorage.getItem('token')
+    const id = localStorage.getItem('userId')
 
     useEffect(() => {
-        const storedData = JSON.parse(localStorage.getItem('data') || '[]')
-        setData(storedData)
-    }, [])
+        const fetchData = async () => {
+            try {
+                const response = await fetch(
+                    `${import.meta.env.VITE_URL_API}/user/data/${id}`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                )
+                const data = await response.json()
+                if (data) {
+                    setData(data)
+                }
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        fetchData()
+    }, [setData, token, id])
 
     const processParsedData = (data: DataItem[]) => {
         return data.map((item) => ({
@@ -41,10 +63,11 @@ const Dashboard = () => {
     }
 
     const parsedData = processParsedData(data)
-    console.log(parsedData)
-
-    const minWeight = Math.min(...data.map((item) => item.weight))
-    const maxWeight = Math.max(...data.map((item) => item.weight))
+    const validWeights = data
+        .filter((item) => item.weight !== null)
+        .map((item) => item.weight || 0)
+    const minWeight = Math.min(...validWeights)
+    const maxWeight = Math.max(...validWeights)
 
     function roundToNearestFiveUp(num: number): number {
         return Math.ceil(num / 5) * 5
