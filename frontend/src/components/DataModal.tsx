@@ -2,7 +2,7 @@ import Modal from 'react-modal'
 import Button from './Button'
 import { useEffect, useState, ChangeEvent, FormEvent } from 'react'
 import Loader from './Loader'
-import useUserDataStore from '../userStore'
+import useUserDataStore from '../userDataStore'
 
 interface CustomModalProps {
     isOpen: boolean
