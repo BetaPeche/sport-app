@@ -1,7 +1,12 @@
 import { NavLink, useNavigate } from 'react-router-dom'
+import useUserDataStore from '../userDataStore'
+import useUserProfilStore from '../userProfilStore'
 
 const Navigation = () => {
     const navigate = useNavigate()
+    const { removeDatas } = useUserDataStore()
+    const { removeProfil } = useUserProfilStore()
+
     return (
         <nav>
             <ul>
@@ -35,8 +40,10 @@ const Navigation = () => {
                         }
                         onClick={() => {
                             localStorage.removeItem('token'),
-                                localStorage.removeItem('userId')
-                            navigate('/')
+                                localStorage.removeItem('userId'),
+                                removeDatas(),
+                                removeProfil(),
+                                navigate('/')
                         }}
                     >
                         <i className="fa-solid fa-arrow-right-from-bracket"></i>
