@@ -75,6 +75,7 @@ main.dashboard {
         justify-content: center;
         align-items: center;
         gap: 20px;
+        max-height: 280px;
         color: #e8e8e8;
         font-size: 16px;
         i {
@@ -91,12 +92,8 @@ main.dashboard {
     .statistics__group {
         display: flex;
         flex-direction: column;
-        gap: 25px;
+        justify-content: space-around;
     }
-}
-
-.recharts-responsive-container {
-    grid-column: 1 / -1;
 }
 
 .statistics__item {
@@ -169,13 +166,6 @@ main.dashboard {
             }
         }
     }
-    // .recharts-xAxis {
-    //     .recharts-cartesian-axis-tick {
-    //         tspan {
-    //             font-size: 10px;
-    //         }
-    //     }
-    // }
 }
 
 @media (max-width: 1280px) {
@@ -186,6 +176,9 @@ main.dashboard {
         }
         .dashboard__statistics {
             grid-row: 1;
+        }
+        .statistics__group {
+            gap: 40px;
         }
     }
 }
