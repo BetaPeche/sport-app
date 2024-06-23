@@ -3,27 +3,29 @@ import Button from '../components/Button'
 import Header from '../components/Header'
 import Navigation from '../components/Navigation'
 import Loader from '../components/Loader'
+import useUserProfilStore from '../userProfilStore'
 
 type FormData = {
     name: string
-    age: string
-    height: string
-    gender: string
-    activity: string
-    objectiveWeight: string
+    age: number | null
+    height: number | null
+    gender: number
+    activity: number
+    objectiveWeight: number | null
 }
 
 const Profil: React.FC = () => {
+    const { setProfil } = useUserProfilStore()
     const [error, setError] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
     const [haveProfil, setHaveProfil] = useState<boolean>(false)
     const [formData, setFormData] = useState<FormData>({
         name: '',
-        age: '',
-        height: '',
-        gender: '2',
-        activity: '3',
-        objectiveWeight: '',
+        age: null,
+        height: null,
+        gender: 2,
+        activity: 3,
+        objectiveWeight: null,
     })
 
     const id = localStorage.getItem('userId')
@@ -46,6 +48,7 @@ const Profil: React.FC = () => {
                 )
                 const data = await response.json()
                 if (data) {
+                    setProfil(data)
                     setHaveProfil(true)
                     setFormData({
                         name: data.name,
@@ -62,7 +65,7 @@ const Profil: React.FC = () => {
             setLoading(false)
         }
         fetchData()
-    }, [id, token])
+    }, [id, token, setProfil])
 
     const blockInvalidChar = (
         e: React.KeyboardEvent<HTMLInputElement>
@@ -77,12 +80,14 @@ const Profil: React.FC = () => {
     ) => {
         const { name, value } = e.target
 
+        const processedValue =
+            e.target.type === 'number' && value === '' ? null : value
+
         setFormData({
             ...formData,
-            [name]: value,
+            [name]: processedValue,
         })
     }
-
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
@@ -90,9 +95,9 @@ const Profil: React.FC = () => {
 
         switch (true) {
             case formData.name === '' ||
-                formData.age === '' ||
-                formData.height === '' ||
-                formData.objectiveWeight === '':
+                formData.age === null ||
+                formData.height === null ||
+                formData.objectiveWeight === null:
                 errorMessage = 'Veuillez remplir tous les champs'
                 break
             default:
@@ -144,6 +149,15 @@ const Profil: React.FC = () => {
             } catch (error) {
                 setError('Une erreur réseau est survenue')
             }
+            setProfil({
+                userId: id,
+                name: formData.name,
+                age: formData.age,
+                height: formData.height,
+                gender: formData.gender,
+                activity: formData.activity,
+                objectiveWeight: formData.objectiveWeight,
+            })
             setHaveProfil(true)
             setLoading(false)
         }
@@ -176,7 +190,7 @@ const Profil: React.FC = () => {
                             name="age"
                             placeholder='Ex: "30"'
                             onKeyDown={blockInvalidChar}
-                            value={formData.age}
+                            value={formData.age === null ? '' : formData.age}
                             onChange={handleChange}
                         />
                     </div>
@@ -190,7 +204,9 @@ const Profil: React.FC = () => {
                             name="height"
                             placeholder='Ex: "180"'
                             onKeyDown={blockInvalidChar}
-                            value={formData.height}
+                            value={
+                                formData.height === null ? '' : formData.height
+                            }
                             onChange={handleChange}
                         />
                     </div>
@@ -229,7 +245,11 @@ const Profil: React.FC = () => {
                             id="objectiveWeight"
                             name="objectiveWeight"
                             placeholder='Ex: "75"'
-                            value={formData.objectiveWeight}
+                            value={
+                                formData.objectiveWeight === null
+                                    ? ''
+                                    : formData.objectiveWeight
+                            }
                             onChange={handleChange}
                         />
                     </div>
