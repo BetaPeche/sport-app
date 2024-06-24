@@ -15,10 +15,9 @@ type FormData = {
 }
 
 const Profil: React.FC = () => {
-    const { setProfil } = useUserProfilStore()
+    const { profil, setProfil } = useUserProfilStore()
     const [error, setError] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
-    const [haveProfil, setHaveProfil] = useState<boolean>(false)
     const [formData, setFormData] = useState<FormData>({
         name: '',
         age: null,
@@ -32,40 +31,17 @@ const Profil: React.FC = () => {
     const token = localStorage.getItem('token')
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setLoading(true)
-                setError('')
-                const response = await fetch(
-                    `${import.meta.env.VITE_URL_API}/user/profil/${id}`,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                )
-                const data = await response.json()
-                if (data) {
-                    setProfil(data)
-                    setHaveProfil(true)
-                    setFormData({
-                        name: data.name,
-                        age: data.age,
-                        height: data.height,
-                        gender: data.gender,
-                        activity: data.activity,
-                        objectiveWeight: data.objectiveWeight,
-                    })
-                }
-            } catch (error) {
-                console.error(error)
-            }
-            setLoading(false)
+        if (profil) {
+            setFormData({
+                name: profil.name,
+                age: profil.age,
+                height: profil.height,
+                gender: profil.gender,
+                activity: profil.activity,
+                objectiveWeight: profil.objectiveWeight,
+            })
         }
-        fetchData()
-    }, [id, token, setProfil])
+    }, [profil])
 
     const blockInvalidChar = (
         e: React.KeyboardEvent<HTMLInputElement>
@@ -109,7 +85,7 @@ const Profil: React.FC = () => {
         if (errorMessage === '') {
             try {
                 setLoading(true)
-                if (haveProfil) {
+                if (profil) {
                     await fetch(
                         `${import.meta.env.VITE_URL_API}/user/profil/${id}`,
                         {
@@ -158,7 +134,6 @@ const Profil: React.FC = () => {
                 activity: formData.activity,
                 objectiveWeight: formData.objectiveWeight,
             })
-            setHaveProfil(true)
             setLoading(false)
         }
     }
@@ -230,10 +205,10 @@ const Profil: React.FC = () => {
                             value={formData.activity}
                             onChange={handleChange}
                         >
-                            <option value="1">Sédentaire</option>
-                            <option value="2">Légère</option>
-                            <option value="3">Modérée</option>
-                            <option value="4">Intense</option>
+                            <option value="1.2">Sédentaire</option>
+                            <option value="1.375">Légère</option>
+                            <option value="1.55">Modérée</option>
+                            <option value="1.725">Intense</option>
                         </select>
                     </div>
                     <div className="form__input">
