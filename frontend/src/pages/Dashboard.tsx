@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Navigation from '../components/Navigation'
 import useUserDataStore from '../userDataStore'
 import Header from '../components/Header'
@@ -9,36 +9,9 @@ import Card from '../components/Card'
 import useUserProfilStore from '../userProfilStore'
 
 const Dashboard = () => {
-    const { data, setData } = useUserDataStore()
+    const { data } = useUserDataStore()
     const { profil } = useUserProfilStore()
     const [modalIsOpen, setIsOpen] = useState<boolean>(false)
-    const token = localStorage.getItem('token')
-    const id = localStorage.getItem('userId')
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(
-                    `${import.meta.env.VITE_URL_API}/user/data/${id}`,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                )
-                const data = await response.json()
-
-                if (data) {
-                    setData(data)
-                }
-            } catch (error) {
-                console.error(error)
-            }
-        }
-        fetchData()
-    }, [setData, token, id])
 
     const lastData = data[data.length - 1]
 
@@ -48,6 +21,36 @@ const Dashboard = () => {
 
     const closeModal = () => {
         setIsOpen(false)
+    }
+
+    let imc = 0
+
+    if (lastData?.weight && profil?.height) {
+        imc =
+            lastData.weight / ((profil?.height / 100) * (profil?.height / 100))
+    }
+
+    let calory = 0
+
+    if (
+        lastData?.weight &&
+        profil?.height &&
+        profil?.age &&
+        profil?.gender &&
+        profil?.activity
+    ) {
+        if (profil.gender == 1) {
+            calory =
+                (10 * lastData.weight +
+                    6.25 * profil.height -
+                    5 * profil.age -
+                    161) *
+                profil.activity
+        } else if (profil.gender == 2) {
+            calory =
+                (10 * lastData.weight + 6.25 * profil.height - 5 * profil.age) *
+                profil.activity
+        }
     }
 
     return (
@@ -61,7 +64,7 @@ const Dashboard = () => {
                         <div className="dashboard__cards-group">
                             <Card
                                 title="Besoin calorique :"
-                                content="2700 Kcal"
+                                content={`${Math.round(calory)} kcal`}
                                 className="fa-solid fa-fire"
                             />
                             <Card
@@ -78,12 +81,12 @@ const Dashboard = () => {
                             />
                             <Card
                                 title="IMC :"
-                                content="21.5"
+                                content={imc.toFixed(1)}
                                 className="fa-solid fa-leaf"
                             />
                         </div>
                     </div>
-                    <Chart data={data} />
+                    {data[0] && <Chart data={data} />}
                 </section>
                 <section className="dashboard__statistics">
                     <button
