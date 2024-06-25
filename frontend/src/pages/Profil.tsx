@@ -3,7 +3,7 @@ import Button from '../components/Button'
 import Header from '../components/Header'
 import Navigation from '../components/Navigation'
 import Loader from '../components/Loader'
-import useUserProfilStore from '../userProfilStore'
+import useUserProfilStore from '../stores/userProfilStore'
 
 type FormData = {
     name: string
@@ -220,6 +220,7 @@ const Profil: React.FC = () => {
                             id="objectiveWeight"
                             name="objectiveWeight"
                             placeholder='Ex: "75"'
+                            onKeyDown={blockInvalidChar}
                             value={
                                 formData.objectiveWeight === null
                                     ? ''

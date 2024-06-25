@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import Loader from './Loader'
-import useUserDataStore from '../userDataStore'
-import useUserProfilStore from '../userProfilStore'
+import useUserDataStore from '../stores/userDataStore'
+import useUserProfilStore from '../stores/userProfilStore'
 
 interface PrivateRouteProps {
     redirectPath: string

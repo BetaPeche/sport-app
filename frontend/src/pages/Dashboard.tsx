@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import Navigation from '../components/Navigation'
-import useUserDataStore from '../userDataStore'
+import useUserDataStore from '../stores/userDataStore'
 import Header from '../components/Header'
 import InfoBar from '../components/InfoBar'
 import DataModal from '../components/DataModal'
 import Chart from '../components/Chart'
 import Card from '../components/Card'
-import useUserProfilStore from '../userProfilStore'
+import useUserProfilStore from '../stores/userProfilStore'
 
 const Dashboard = () => {
     const { data } = useUserDataStore()

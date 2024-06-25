@@ -2,7 +2,7 @@ import Modal from 'react-modal'
 import Button from './Button'
 import { useEffect, useState, ChangeEvent, FormEvent } from 'react'
 import Loader from './Loader'
-import useUserDataStore from '../userDataStore'
+import useUserDataStore from '../stores/userDataStore'
 
 interface CustomModalProps {
     isOpen: boolean
@@ -137,19 +137,25 @@ const CustomModal: React.FC<CustomModalProps> = ({
                 X
             </button>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="weight">Poids</label>
+                <label htmlFor="weight">
+                    Poids <span>(en kilogrammes)</span>
+                </label>
                 <input
                     type="number"
                     name="weight"
                     id="weight"
+                    placeholder='Ex: "80"'
                     value={formData.weight !== null ? formData.weight : ''}
                     onChange={handleChange}
                 />
-                <label htmlFor="muscular-mass">Masse Musculaire</label>
+                <label htmlFor="muscular-mass">
+                    Masse Musculaire <span>(en %)</span>
+                </label>
                 <input
                     type="number"
                     name="muscular-mass"
                     id="muscular-mass"
+                    placeholder='Ex: "30"'
                     value={
                         formData['muscular-mass'] !== null
                             ? formData['muscular-mass']
@@ -157,19 +163,25 @@ const CustomModal: React.FC<CustomModalProps> = ({
                     }
                     onChange={handleChange}
                 />
-                <label htmlFor="water">Eau</label>
+                <label htmlFor="water">
+                    Eau <span>(en %)</span>
+                </label>
                 <input
                     type="number"
                     name="water"
                     id="water"
+                    placeholder='Ex: "30"'
                     value={formData.water !== null ? formData.water : ''}
                     onChange={handleChange}
                 />
-                <label htmlFor="visceral-fat">Graisse Viscérale</label>
+                <label htmlFor="visceral-fat">
+                    Graisse Viscérale <span>(en %)</span>
+                </label>
                 <input
                     type="number"
                     name="visceral-fat"
                     id="visceral-fat"
+                    placeholder='Ex: "30"'
                     value={
                         formData['visceral-fat'] !== null
                             ? formData['visceral-fat']
@@ -177,11 +189,14 @@ const CustomModal: React.FC<CustomModalProps> = ({
                     }
                     onChange={handleChange}
                 />
-                <label htmlFor="protein">Protéine</label>
+                <label htmlFor="protein">
+                    Protéine <span>(en %)</span>
+                </label>
                 <input
                     type="number"
                     name="protein"
                     id="protein"
+                    placeholder='Ex: "30"'
                     value={formData.protein !== null ? formData.protein : ''}
                     onChange={handleChange}
                 />
