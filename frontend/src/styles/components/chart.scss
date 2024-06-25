@@ -1,0 +1,9 @@
+@media (max-width: 768px) {
+    .recharts-xAxis {
+        .recharts-cartesian-axis-tick {
+            tspan {
+                display: none;
+            }
+        }
+    }
+}
