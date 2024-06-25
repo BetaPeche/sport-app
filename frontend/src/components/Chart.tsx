@@ -9,6 +9,7 @@ import {
     ReferenceLine,
     Label,
 } from 'recharts'
+import useUserProfilStore from '../stores/userProfilStore'
 
 type DataItem = {
     date: Date
@@ -29,7 +30,7 @@ const Chart: React.FC<ChartProps> = ({ data }) => {
             date: new Date(item.date).getTime(),
         }))
     }
-
+    const { profil } = useUserProfilStore()
     const parsedData = processParsedData(data)
     const validWeights = data
         .filter((item) => item.weight !== null)
@@ -129,7 +130,7 @@ const Chart: React.FC<ChartProps> = ({ data }) => {
                     animationDuration={1000}
                 />
                 <ReferenceLine
-                    y={78}
+                    y={profil?.objectiveWeight ? profil.objectiveWeight : 0}
                     ifOverflow="hidden"
                     stroke="red"
                     strokeWidth={2}
