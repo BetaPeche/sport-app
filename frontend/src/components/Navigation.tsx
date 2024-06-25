@@ -1,18 +1,28 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import useUserDataStore from '../userDataStore'
-import useUserProfilStore from '../userProfilStore'
+import useUserDataStore from '../stores/userDataStore'
+import useUserProfilStore from '../stores/userProfilStore'
+import buttonHeaderStore from '../stores/buttonHeaderStore'
 
 const Navigation = () => {
     const navigate = useNavigate()
     const { removeDatas } = useUserDataStore()
     const { removeProfil } = useUserProfilStore()
+    const { button, toggleButton } = buttonHeaderStore()
 
     return (
-        <nav>
+        <nav
+            className={
+                button === 'open' ? 'navigation__open' : 'navigation__close'
+            }
+        >
+            <button onClick={toggleButton}>
+                <i className="fa-solid fa-xmark"></i>
+            </button>
             <ul>
                 <li>
                     <NavLink
                         to="/dashboard"
+                        onClick={toggleButton}
                         className={(nav) =>
                             nav.isActive ? 'navigation_li--active' : ''
                         }
@@ -24,6 +34,7 @@ const Navigation = () => {
                 <li>
                     <NavLink
                         to="/profil"
+                        onClick={toggleButton}
                         className={(nav) =>
                             nav.isActive ? 'navigation_li--active' : ''
                         }
@@ -39,7 +50,8 @@ const Navigation = () => {
                             nav.isActive ? 'navigation_li--active' : ''
                         }
                         onClick={() => {
-                            localStorage.removeItem('token'),
+                            toggleButton(),
+                                localStorage.removeItem('token'),
                                 localStorage.removeItem('userId'),
                                 removeDatas(),
                                 removeProfil(),

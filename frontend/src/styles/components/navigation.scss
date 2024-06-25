@@ -1,6 +1,16 @@
 nav {
     height: calc(100vh - 170px);
     min-width: 190px;
+    button {
+        display: none;
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 24px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
     ul {
         width: 100%;
         height: 100%;
@@ -37,5 +47,35 @@ nav {
                 margin-top: auto;
             }
         }
+    }
+}
+
+@media (max-width: 1024px) {
+    nav {
+        position: fixed;
+        top: 0;
+        width: 280px;
+        left: -280px;
+        background-color: rgba(0, 0, 0, 0.99);
+        z-index: 1;
+        height: 100vh;
+        padding: calc(2% + 10px) calc(2% + 20px) 150px calc(2% + 20px);
+        transition: left 0.3s ease-in-out;
+        button {
+            display: block;
+            margin-bottom: 50px;
+        }
+        &.navigation__open {
+            left: 0;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        width: 220px;
+        left: -220px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 }

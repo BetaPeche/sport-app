@@ -2,12 +2,23 @@ header {
     grid-column: 1 / -1;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 0 20px;
+    gap: 20px;
+    button {
+        display: none;
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 24px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
     .header__user {
         display: flex;
         align-items: center;
         gap: 25px;
+        margin-left: auto;
         span {
             font-size: 18px;
             font-weight: 500;
@@ -17,6 +28,17 @@ header {
             height: 46px;
             border-radius: 50%;
             object-fit: cover;
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    header {
+        button {
+            display: block;
+        }
+        h1 {
+            font-size: 20px;
         }
     }
 }
