@@ -11,7 +11,7 @@ const Header = () => {
                 <i className="fa-solid fa-bars"></i>
             </button>
             <h1>
-                <Link to={'/'}>My SPORT APP</Link>
+                <Link to={'/'}>Follw</Link>
             </h1>
             <div className="header__user">
                 <span>Loïc</span>
