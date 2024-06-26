@@ -14,7 +14,7 @@ const Header = () => {
                 <Link to={'/'}>Follw</Link>
             </h1>
             <div className="header__user">
-                <span>Loïc</span>
+                <span>{profil?.name}</span>
                 <img
                     src={
                         profil?.imageUrl
