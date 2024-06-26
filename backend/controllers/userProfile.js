@@ -17,7 +17,7 @@ exports.postUserProfile = (req, res) => {
             .json({ error: 'Tous les champs sont obligatoires' })
     }
     if (req.file) {
-        const imagePath = `${req.protocol}://${req.get('host')}/images/${
+        const imagePath = `https://${req.get('host')}/images/${
             req.file.filename
         }`
         userprofile.imageUrl = imagePath
@@ -40,7 +40,7 @@ exports.updateUserProfile = (req, res) => {
     let updateData = { ...req.body }
 
     if (req.file) {
-        const imagePath = `${req.protocol}://${req.get('host')}/images/${
+        const imagePath = `https://${req.get('host')}/images/${
             req.file.filename
         }`
         updateData.imageUrl = imagePath
