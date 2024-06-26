@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import buttonHeaderStore from '../stores/buttonHeaderStore'
+import useUserProfilStore from '../stores/userProfilStore'
 
 const Header = () => {
     const { toggleButton } = buttonHeaderStore()
+    const { profil } = useUserProfilStore()
     return (
         <header>
             <button onClick={toggleButton}>
@@ -13,7 +15,14 @@ const Header = () => {
             </h1>
             <div className="header__user">
                 <span>Loïc</span>
-                <img src="./profil_base.webp" alt="Image de profil" />
+                <img
+                    src={
+                        profil?.imageUrl
+                            ? profil?.imageUrl
+                            : './profil_base.webp'
+                    }
+                    alt="Image de profil"
+                />
             </div>
         </header>
     )
