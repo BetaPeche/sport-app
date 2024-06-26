@@ -134,7 +134,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
             contentLabel="Modale de saisie des données"
         >
             <button className="close-modal" onClick={onRequestClose}>
-                X
+                <i className="fa-solid fa-xmark"></i>
             </button>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="weight">
