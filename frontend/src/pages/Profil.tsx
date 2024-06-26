@@ -18,6 +18,8 @@ const Profil: React.FC = () => {
     const { profil, setProfil } = useUserProfilStore()
     const [error, setError] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
+    const [image, setImage] = useState<File | null>(null)
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null)
     const [formData, setFormData] = useState<FormData>({
         name: '',
         age: null,
@@ -64,6 +66,18 @@ const Profil: React.FC = () => {
             [name]: processedValue,
         })
     }
+    const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length > 0) {
+            const file = e.target.files[0]
+            setImage(file)
+
+            const reader = new FileReader()
+            reader.onloadend = () => {
+                setPreviewUrl(reader.result as string)
+            }
+            reader.readAsDataURL(file)
+        }
+    }
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
@@ -85,55 +99,52 @@ const Profil: React.FC = () => {
         if (errorMessage === '') {
             try {
                 setLoading(true)
-                if (profil) {
-                    await fetch(
-                        `${import.meta.env.VITE_URL_API}/user/profil/${id}`,
-                        {
-                            method: 'PUT',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                Authorization: `Bearer ${token}`,
-                            },
-                            body: JSON.stringify({
-                                userId: id,
-                                name: formData.name,
-                                age: formData.age,
-                                height: formData.height,
-                                gender: formData.gender,
-                                activity: formData.activity,
-                                objectiveWeight: formData.objectiveWeight,
-                            }),
-                        }
-                    )
-                } else {
-                    await fetch(`${import.meta.env.VITE_URL_API}/user/profil`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            userId: id,
-                            name: formData.name,
-                            age: formData.age,
-                            height: formData.height,
-                            gender: formData.gender,
-                            activity: formData.activity,
-                            objectiveWeight: formData.objectiveWeight,
-                        }),
-                    })
+                const formDataToSend = new FormData()
+                formDataToSend.append('userId', id as string)
+                formDataToSend.append('name', formData.name)
+                formDataToSend.append('age', formData.age?.toString() as string)
+                formDataToSend.append(
+                    'height',
+                    formData.height?.toString() as string
+                )
+                formDataToSend.append('gender', formData.gender.toString())
+                formDataToSend.append('activity', formData.activity.toString())
+                formDataToSend.append(
+                    'objectiveWeight',
+                    formData.objectiveWeight?.toString() as string
+                )
+
+                if (image) {
+                    formDataToSend.append('imageUrl', image)
                 }
+
+                const requestOptions: RequestInit = {
+                    method: profil ? 'PUT' : 'POST',
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: formDataToSend,
+                }
+
+                const url = profil
+                    ? `${import.meta.env.VITE_URL_API}/user/profil/${id}`
+                    : `${import.meta.env.VITE_URL_API}/user/profil`
+
+                await fetch(url, requestOptions)
+                setProfil({
+                    userId: id,
+                    name: formData.name,
+                    age: formData.age,
+                    height: formData.height,
+                    gender: formData.gender,
+                    activity: formData.activity,
+                    objectiveWeight: formData.objectiveWeight,
+                    imageUrl:
+                        previewUrl || profil?.imageUrl || './profil_base.webp',
+                })
             } catch (error) {
                 setError('Une erreur réseau est survenue')
             }
-            setProfil({
-                userId: id,
-                name: formData.name,
-                age: formData.age,
-                height: formData.height,
-                gender: formData.gender,
-                activity: formData.activity,
-                objectiveWeight: formData.objectiveWeight,
-            })
             setLoading(false)
         }
     }
@@ -145,7 +156,24 @@ const Profil: React.FC = () => {
             <main className="profil">
                 <h2>Profil</h2>
                 <form onSubmit={handleSubmit}>
-                    <img src="./profil_base.webp" alt="Profile" />
+                    <div className="form__image">
+                        <img
+                            src={
+                                previewUrl ||
+                                profil?.imageUrl ||
+                                './profil_base.webp'
+                            }
+                            alt="Profile Preview"
+                        />
+                        <input
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            name="profil-image"
+                            id="profil-image"
+                            onChange={handleImageChange}
+                        />
+                        <label htmlFor="profil-image">Modifier</label>
+                    </div>
                     <div className="form__input">
                         <label htmlFor="name">Prénom</label>
                         <input
