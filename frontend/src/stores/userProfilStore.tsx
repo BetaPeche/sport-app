@@ -10,6 +10,7 @@ type ProfilItem = {
     height: number | null
     name: string
     objectiveWeight: number | null
+    imageUrl?: string
     __v?: number
 }
 
