@@ -12,6 +12,7 @@ const userProfileSchema = mongoose.Schema({
     height: { type: Number, required: true },
     name: { type: String, required: true },
     objectiveWeight: { type: Number, required: true },
+    imageUrl: { type: String },
 })
 
 module.exports = mongoose.model('UserProfile', userProfileSchema)

@@ -16,6 +16,12 @@ exports.postUserProfile = (req, res) => {
             .status(400)
             .json({ error: 'Tous les champs sont obligatoires' })
     }
+    if (req.file) {
+        const imagePath = `${req.protocol}://${req.get('host')}/images/${
+            req.file.filename
+        }`
+        userprofile.imageUrl = imagePath
+    }
 
     userprofile
         .save()
@@ -30,7 +36,17 @@ exports.getUserProfile = (req, res) => {
 }
 
 exports.updateUserProfile = (req, res) => {
-    UserProfile.updateOne({ userId: req.params.userId }, { ...req.body })
+    const userId = req.params.userId
+    let updateData = { ...req.body }
+
+    if (req.file) {
+        const imagePath = `${req.protocol}://${req.get('host')}/images/${
+            req.file.filename
+        }`
+        updateData.imageUrl = imagePath
+    }
+
+    UserProfile.updateOne({ userId: userId }, updateData)
         .then(() => res.status(200).json({ message: 'Données mises à jour !' }))
         .catch((error) => res.status(400).json({ error }))
 }
