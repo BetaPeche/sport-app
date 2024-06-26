@@ -1,4 +1,6 @@
 const UserProfile = require('../models/userProfile')
+const cloudinary = require('cloudinary').v2
+const upload = require('../middleware/multer-config')
 
 exports.postUserProfile = (req, res) => {
     const userprofile = new UserProfile(req.body)
@@ -16,17 +18,35 @@ exports.postUserProfile = (req, res) => {
             .status(400)
             .json({ error: 'Tous les champs sont obligatoires' })
     }
-    if (req.file) {
-        const imagePath = `https://${req.get('host')}/images/${
-            req.file.filename
-        }`
-        userprofile.imageUrl = imagePath
-    }
 
-    userprofile
-        .save()
-        .then(() => res.status(201).json({ message: 'Données enregistrées !' }))
-        .catch((error) => res.status(400).json({ error }))
+    if (req.file) {
+        cloudinary.uploader.upload(req.file.path, (error, result) => {
+            if (error) {
+                console.error(
+                    "Erreur lors du téléchargement de l'image sur Cloudinary:",
+                    error
+                )
+                return res
+                    .status(500)
+                    .json({ error: "Erreur lors du téléchargement de l'image" })
+            }
+            userprofile.imageUrl = result.secure_url
+
+            userprofile
+                .save()
+                .then(() =>
+                    res.status(201).json({ message: 'Données enregistrées !' })
+                )
+                .catch((error) => res.status(400).json({ error }))
+        })
+    } else {
+        userprofile
+            .save()
+            .then(() =>
+                res.status(201).json({ message: 'Données enregistrées !' })
+            )
+            .catch((error) => res.status(400).json({ error }))
+    }
 }
 
 exports.getUserProfile = (req, res) => {
@@ -40,13 +60,28 @@ exports.updateUserProfile = (req, res) => {
     let updateData = { ...req.body }
 
     if (req.file) {
-        const imagePath = `https://${req.get('host')}/images/${
-            req.file.filename
-        }`
-        updateData.imageUrl = imagePath
+        cloudinary.uploader.upload(req.file.path, (error, result) => {
+            if (error) {
+                console.error(
+                    "Erreur lors du téléchargement de l'image sur Cloudinary:",
+                    error
+                )
+                return res
+                    .status(500)
+                    .json({ error: "Erreur lors du téléchargement de l'image" })
+            }
+            updateData.imageUrl = result.secure_url
+            UserProfile.updateOne({ userId: userId }, updateData)
+                .then(() =>
+                    res.status(200).json({ message: 'Données mises à jour !' })
+                )
+                .catch((error) => res.status(400).json({ error }))
+        })
+    } else {
+        UserProfile.updateOne({ userId: userId }, updateData)
+            .then(() =>
+                res.status(200).json({ message: 'Données mises à jour !' })
+            )
+            .catch((error) => res.status(400).json({ error }))
     }
-
-    UserProfile.updateOne({ userId: userId }, updateData)
-        .then(() => res.status(200).json({ message: 'Données mises à jour !' }))
-        .catch((error) => res.status(400).json({ error }))
 }
