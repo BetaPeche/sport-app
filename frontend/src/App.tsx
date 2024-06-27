@@ -7,6 +7,7 @@ import Profil from './pages/Profil'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import PrivateRoute from './components/PrivateRoute'
+import { Analytics } from '@vercel/analytics/react'
 
 function RootClassManager() {
     const location = useLocation()
@@ -48,6 +49,7 @@ function App() {
                     <Route path="/settings" element={<Settings />} />
                 </Route>
             </Routes>
+            <Analytics />
         </BrowserRouter>
     )
 }
