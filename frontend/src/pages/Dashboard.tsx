@@ -99,7 +99,7 @@ const Dashboard = () => {
                     <div className="statistics__group">
                         <InfoBar
                             name="Masse musculaire"
-                            value={(lastData && lastData.visceralFat) || 0}
+                            value={(lastData && lastData.muscularMass) || 0}
                             color="green"
                         />
                         <InfoBar
