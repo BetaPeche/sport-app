@@ -75,8 +75,8 @@ const Dashboard = () => {
                         </div>
                         <div className="dashboard__cards-group">
                             <Card
-                                title="Taille :"
-                                content={`${profil?.height || 0} cm`}
+                                title="Poids objectif :"
+                                content={`${profil?.objectiveWeight || 0} kg`}
                                 className="fa-solid fa-ruler"
                             />
                             <Card
