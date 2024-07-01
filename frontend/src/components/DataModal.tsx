@@ -147,6 +147,7 @@ const CustomModal: React.FC<CustomModalProps> = ({
                     placeholder='Ex: "80"'
                     value={formData.weight !== null ? formData.weight : ''}
                     onChange={handleChange}
+                    min="0"
                 />
                 <label htmlFor="muscular-mass">
                     Masse Musculaire <span>(en %)</span>
@@ -162,6 +163,8 @@ const CustomModal: React.FC<CustomModalProps> = ({
                             : ''
                     }
                     onChange={handleChange}
+                    min="0"
+                    max="100"
                 />
                 <label htmlFor="water">
                     Eau <span>(en %)</span>
@@ -173,6 +176,8 @@ const CustomModal: React.FC<CustomModalProps> = ({
                     placeholder='Ex: "30"'
                     value={formData.water !== null ? formData.water : ''}
                     onChange={handleChange}
+                    min="0"
+                    max="100"
                 />
                 <label htmlFor="visceral-fat">
                     Graisse Viscérale <span>(en %)</span>
@@ -188,6 +193,8 @@ const CustomModal: React.FC<CustomModalProps> = ({
                             : ''
                     }
                     onChange={handleChange}
+                    min="0"
+                    max="100"
                 />
                 <label htmlFor="protein">
                     Protéine <span>(en %)</span>
@@ -199,6 +206,8 @@ const CustomModal: React.FC<CustomModalProps> = ({
                     placeholder='Ex: "30"'
                     value={formData.protein !== null ? formData.protein : ''}
                     onChange={handleChange}
+                    min="0"
+                    max="100"
                 />
                 <span>{error}</span>
                 {loading ? (
