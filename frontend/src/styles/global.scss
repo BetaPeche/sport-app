@@ -93,7 +93,6 @@ body {
         filter: blur(100px);
         opacity: 0.6;
         z-index: -5;
-        animation: rotating 3s linear alternate infinite;
     }
     &::after {
         content: '';
@@ -107,7 +106,6 @@ body {
         filter: blur(100px);
         opacity: 0.8;
         z-index: -5;
-        animation: rotating 3s linear alternate infinite;
     }
 }
 
@@ -141,14 +139,5 @@ body {
         &.columns-2 {
             grid-template-columns: 1fr;
         }
-    }
-}
-
-@keyframes rotating {
-    0% {
-        transform: scale(1) rotate(0deg);
-    }
-    100% {
-        transform: scale(1.1) rotate(30deg);
     }
 }
